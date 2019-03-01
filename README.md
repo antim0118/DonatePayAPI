@@ -2,6 +2,7 @@
 Реализация API для DonatePay на C#
 
 Скачать: https://github.com/antimYT/DonatePayAPI/releases
+
 Подробно: http://donatepay.ru/page/api
 
 # Как использовать/Usage
