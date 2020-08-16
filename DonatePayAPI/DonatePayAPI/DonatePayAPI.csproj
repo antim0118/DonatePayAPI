@@ -44,9 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
+    <Compile Include="API.cs" />
+    <Compile Include="Enums\Order.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
+    <Compile Include="Structs\Notification.cs" />
+    <Compile Include="Structs\Time.cs" />
+    <Compile Include="Structs\Transactions.cs" />
+    <Compile Include="Structs\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,32 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DonatePayAPI.Example
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            richTextBox_output.Size = new Size(Width - 40, Height - 118);
-        }
+        static DonatePay.API api;
 
-        private static DonatePay.API api;
+        public Form1()=> InitializeComponent();
+        private void Form1_Resize(object sender, EventArgs e) => richTextBox_output.Size = new Size(Width - 40, Height - 118);
+
         private void InitApi()
         {
-            if (api == null || api.APIKey != textBox_apikey.Text)
+            if (api == null || api.API_KEY != textBox_apikey.Text)
                 api = new DonatePay.API(textBox_apikey.Text);
         }
 
@@ -36,7 +23,7 @@ namespace DonatePayAPI.Example
 
             var user = api.User;
             richTextBox_output.Clear();
-            richTextBox_output.AppendText("\t==User==\n\n");
+            richTextBox_output.AppendText("==User==\n\n");
             richTextBox_output.AppendText("Status=" + user.Status + "\n");
             if (user.Status == DonatePay.Enums.Status.Success)
             {
@@ -48,7 +35,7 @@ namespace DonatePayAPI.Example
                 richTextBox_output.AppendText(" name=" + user.data.name + "\n");
                 richTextBox_output.AppendText("}\n");
             }
-            if(user.Status == DonatePay.Enums.Status.Error && user.message != null)
+            if (user.Status == DonatePay.Enums.Status.Error && user.message != null)
                 richTextBox_output.AppendText("message=" + user.message + "\n");
         }
 
@@ -58,7 +45,7 @@ namespace DonatePayAPI.Example
 
             var transactions = api.Transactions();
             richTextBox_output.Clear();
-            richTextBox_output.AppendText("\t==Transactions==\n\n");
+            richTextBox_output.AppendText("==Transactions==\n\n");
             richTextBox_output.AppendText("Status=" + transactions.Status + "\n");
             if (transactions.Status == DonatePay.Enums.Status.Success)
             {
@@ -68,7 +55,7 @@ namespace DonatePayAPI.Example
                 for (int i = 0; i < transactions.data.Length; i++)
                 {
                     var data = transactions.data[i];
-                    richTextBox_output.AppendText("\ndata #"+i+" {\n");
+                    richTextBox_output.AppendText("\ndata #" + i + " {\n");
                     richTextBox_output.AppendText(" id=" + data.id + "\n");
                     richTextBox_output.AppendText(" what=" + data.what + "\n");
                     richTextBox_output.AppendText(" sum=" + data.sum + "\n");
@@ -96,10 +83,10 @@ namespace DonatePayAPI.Example
 
             PostNotification notification = new PostNotification(api);
             notification.ShowDialog();
-            if(notification.output != null)
+            if (notification.output != null)
             {
                 richTextBox_output.Clear();
-                richTextBox_output.AppendText("\t==Notification==\n\n");
+                richTextBox_output.AppendText("==Notification==\n\n");
                 richTextBox_output.AppendText("Status=" + notification.output.Status + "\n");
                 richTextBox_output.AppendText("message=" + notification.output.message + "\n");
             }

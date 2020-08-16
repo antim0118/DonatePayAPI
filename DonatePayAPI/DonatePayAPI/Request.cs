@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DonatePay
 {
@@ -18,9 +14,7 @@ namespace DonatePay
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream))
-            {
                 return reader.ReadToEnd();
-            }
         }
 
         public static string POST(string uri, string data, string contentType, string method = "POST")
@@ -34,16 +28,12 @@ namespace DonatePay
             request.Method = method;
 
             using (Stream requestBody = request.GetRequestStream())
-            {
                 requestBody.Write(dataBytes, 0, dataBytes.Length);
-            }
 
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             using (StreamReader reader = new StreamReader(stream))
-            {
                 return reader.ReadToEnd();
-            }
         }
     }
 }
